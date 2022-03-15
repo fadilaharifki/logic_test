@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .jam-Dunia {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .rowJam {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .title {
+            display: flex;
+            font-weight: bold;
+            font-size: 25px;
+            width: 100%;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">Jam Dunia</div>
+    <div id="jamdunia" class="jam-Dunia">
+    </div>
+    <script>
+
+        window.setTimeout("waktu()", 0);
+
+        let output = ''
+
+        for (let i = 0; i < 10; i++) {
+            output += `
+                <div class="rowJam">
+                    <div>
+                        <p id="jam${i}"></p>
+                    </div>
+                    <div>
+                        <p id="menit${i}"></p>
+                    </div>
+                    <div>
+                        <p id="detik${i}"></p>
+                    </div>
+                </div>
+            `;
+            jamdunia.innerHTML = output
+        }
+
+        function waktu() {
+            var waktu = new Date();
+            setTimeout("waktu()", 100);
+            for (let i = 0; i < 10; i++) {
+                document.getElementById(`jam${i}`).innerHTML = waktu.getHours() - (7 - i) + ':';
+                document.getElementById(`menit${i}`).innerHTML = waktu.getMinutes() - (7 - i) + ':';
+                document.getElementById(`detik${i}`).innerHTML = waktu.getSeconds() - (7 - i) + ` * GMT+${i}`;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

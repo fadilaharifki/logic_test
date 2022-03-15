@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 100px;
+        }
+
+        .content-input {
+            display: flex;
+            flex-direction: row;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+        }
+
+        button {
+            margin: 10px 0;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="content-input">
+            <div>Nama:</div>
+            <input id="name" onchange="onchangeName()" type="text" />
+        </div>
+        <div class="content-input">
+            <div>Age:</div>
+            <input id="age" type="number" onchange="onchangeAge()" />
+        </div>
+        <div class="content-input">
+            <div>Jenis Kelamin:</div>
+            <input type="radio" onclick="onchangeGender(value)" name="gender" id="gender" value="Pria" />
+            <div>Pria</div>
+            <input type="radio" onclick="onchangeGender(value)" name="gender" id="gender" value="Wanita" />
+            <div>Wanita</div>
+        </div>
+        <div class="content-input">
+            <div>Pekerjaan: </div>
+            <input id="job" onchange="onchangeJob()" type="text" />
+        </div>
+
+        <div class="button-container">
+            <button onclick="myFunction()">Submit</button>
+            <button onclick="sortName()">Sort Name</button>
+            <button onclick="sortAge()">Sort Age</button>
+            <button onclick="sortGender()">Sort Kelamin</button>
+            <button onclick="sortJob()">Sort Pekerjaan</button>
+        </div>
+        <table id="target" border="1" cellpadding="10">
+
+        </table>
+    </div>
+    <script>
+
+        let data = [
+            {
+                name: "Andrian",
+                age: 23,
+                gender: 'Pria',
+                job: 'Preman'
+            },
+            {
+                name: "Baron",
+                age: 20,
+                gender: 'Pria',
+                job: 'Guru'
+            },
+            {
+                name: "Budi",
+                age: 23,
+                gender: 'Pria',
+                job: 'Coders'
+            },
+            {
+                name: "Jordan",
+                age: 22,
+                gender: 'Pria',
+                job: 'Wibu'
+            },
+            {
+                name: "Madeline",
+                age: 19,
+                gender: 'Wanita',
+                job: 'Singer'
+            },
+
+            {
+                name: "Christie",
+                age: 18,
+                gender: 'Wanita',
+                job: 'Dancers'
+            },
+        ]
+
+        let output = `<tr>
+            <td>Nama</td>
+            <td>Umur</td>
+            <td>Kelamin</td>
+            <td>Pekerjaan</td>
+        </tr>`
+
+        data.forEach((e) => {
+            output += `
+            <tr id="content">
+                <td>${e.name}</td>
+                <td>${e.age}</td>
+                <td>${e.gender}</td>
+                <td>${e.job}</td>
+            </tr>
+            `;
+            target.innerHTML = output
+        })
+
+        let obj = {}
+
+
+
+        function onchangeName() {
+            obj.name = document.getElementById("name").value
+        }
+        function onchangeAge() {
+            obj.age = document.getElementById("age").value
+        }
+
+        function onchangeGender(params) {
+            obj.gender = params
+        }
+
+        function onchangeJob() {
+            obj.job = document.getElementById("job").value
+        }
+
+
+        function myFunction() {
+            data.push(obj)
+            output = `<tr>
+            <td>Nama</td>
+            <td>Umur</td>
+            <td>Kelamin</td>
+            <td>Pekerjaan</td>
+        </tr>`
+            data.forEach((e) => {
+                output += `
+                <tr id="content">
+                    <td>${e.name}</td>
+                    <td>${e.age}</td>
+                    <td>${e.gender}</td>
+                    <td>${e.job}</td>
+            </tr>
+            `;
+                target.innerHTML = output
+            })
+        }
+
+        function sortName() {
+            output = `<tr>
+                        <td>Nama</td>
+                        <td>Umur</td>
+                        <td>Kelamin</td>
+                        <td>Pekerjaan</td>
+                    </tr>`
+            data.sort(function (a, b) {
+                const nameA = a.name.toUpperCase();
+                const nameB = b.name.toUpperCase();
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            data.forEach((e) => {
+                output += `
+                <tr id="content">
+                    <td>${e.name}</td>
+                    <td>${e.age}</td>
+                    <td>${e.gender}</td>
+                    <td>${e.job}</td>
+            </tr>
+            `;
+                target.innerHTML = output
+            })
+        }
+
+        function sortAge() {
+            output = `<tr>
+                        <td>Nama</td>
+                        <td>Umur</td>
+                        <td>Kelamin</td>
+                        <td>Pekerjaan</td>
+                    </tr>`
+            data.sort(function (a, b) {
+                const ageA = a.age;
+                const ageB = b.age;
+                if (ageA < ageB) {
+                    return -1;
+                }
+                if (ageA > ageB) {
+                    return 1;
+                }
+                return 0;
+            });
+
+
+            data.forEach((e) => {
+                output += `
+                <tr id="content">
+                    <td>${e.name}</td>
+                    <td>${e.age}</td>
+                    <td>${e.gender}</td>
+                    <td>${e.job}</td>
+            </tr>
+            `;
+                target.innerHTML = output
+            })
+        }
+
+        function sortJob() {
+            output = `<tr>
+                        <td>Nama</td>
+                        <td>Umur</td>
+                        <td>Kelamin</td>
+                        <td>Pekerjaan</td>
+                    </tr>`
+            data.sort(function (a, b) {
+                const jobA = a.job.toUpperCase();
+                const jobB = b.job.toUpperCase();
+                if (jobA < jobB) {
+                    return -1;
+                }
+                if (jobA > jobB) {
+                    return 1;
+                }
+                return 0;
+            });
+
+
+            data.forEach((e) => {
+                output += `
+                <tr id="content">
+                    <td>${e.name}</td>
+                    <td>${e.age}</td>
+                    <td>${e.gender}</td>
+                    <td>${e.job}</td>
+            </tr>
+            `;
+                target.innerHTML = output
+            })
+        }
+
+        function sortGender() {
+            output = `<tr>
+                        <td>Nama</td>
+                        <td>Umur</td>
+                        <td>Kelamin</td>
+                        <td>Pekerjaan</td>
+                    </tr>`
+            data.sort(function (a, b) {
+                const genderA = a.gender.toUpperCase();
+                const genderB = b.gender.toUpperCase();
+                if (genderA < genderB) {
+                    return -1;
+                }
+                if (genderA > genderB) {
+                    return 1;
+                }
+                return 0;
+            });
+
+
+            data.forEach((e) => {
+                output += `
+                <tr id="content">
+                    <td>${e.name}</td>
+                    <td>${e.age}</td>
+                    <td>${e.gender}</td>
+                    <td>${e.job}</td>
+            </tr>
+            `;
+                target.innerHTML = output
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>
